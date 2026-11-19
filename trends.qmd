@@ -1,0 +1,28 @@
+---
+title: "Trends"
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+```{r}
+attacks <- read_rds("data/attacks.rds")
+```
+
+```{r}
+attacks |>
+  filter(Fatal_clean != "Unknown") |>
+  add_count(Activity, name = "activity_total") |>
+  filter(activity_total >= 50) |>
+  count(Activity, Fatal_clean) |>
+  ggplot(aes(x = Activity, y = n, fill = Fatal_clean)) +
+  geom_col(position = "dodge") +
+  coord_flip() +
+  labs(
+    x = "Activity",
+    y = "Number of attacks",
+    fill = "Outcome"
+  )
+```
