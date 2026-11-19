@@ -1,0 +1,57 @@
+---
+title: "Map"
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(maps)
+```
+
+```{r}
+#| cache: true
+attacks <- read_csv("data/attacks_clean.csv") |>
+  mutate(
+    Country_lower = str_to_lower(str_trim(Country)),
+    Fatal_clean = case_when(
+      Fatal == "Y" ~ "Fatal",
+      Fatal == "N" ~ "Non-fatal",
+      TRUE ~ "Unknown"
+    )
+  )
+
+write_rds(attacks, "data/attacks.rds")
+```
+
+```{r}
+attack_counts <- attacks |>
+  count(Country_lower, name = "attacks")
+
+world_map <- map_data("world") |>
+  mutate(region = str_to_lower(region)) |>
+  left_join(attack_counts, by = c("region" = "Country_lower"))
+
+ggplot(world_map, aes(long, lat, group = group, fill = attacks)) +
+  geom_polygon(color = "white", linewidth = 0.1) +
+  scale_fill_gradient(
+    low = "lightyellow",
+    high = "darkred",
+    trans = "sqrt",
+    na.value = "grey90",
+    name = "Attacks"
+  ) +
+  coord_quickmap() +
+  labs(title = "Shark attacks by country") +
+  theme_void()
+```
+
+## Fatal vs. non-fatal attacks
+
+Only records marked `Y` or `N` are counted; unknown, missing, and other values are excluded.
+
+```{r}
+attacks |>
+  filter(Fatal %in% c("Y", "N")) |>
+  mutate(Outcome = recode(Fatal, Y = "Fatal", N = "Non-fatal")) |>
+  count(Outcome)
+```
