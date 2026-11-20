@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Shark Attacks",
+    "section": "",
+    "text": "The Global Shark Attack File (GSAF) is a public database of reported shark incidents from around the world. Its historical and recent records help people explore where and under what circumstances incidents have been reported. Like any incident database, it reflects reported cases rather than every interaction between people and sharks.\nPublic fear of sharks can be out of proportion to the risk: attacks are rare compared with the many people who swim or work in ocean waters. Dramatic stories can make rare events feel common. Looking at recorded incidents can help put that coverage in context without minimizing the harm an attack can cause.\nUse Map to explore recorded attack counts by country. Trends compares fatal and non-fatal attacks by activity, excluding incidents with unknown outcomes and showing activities with at least 50 known-outcome incidents. These counts describe the records in this dataset, not the chance of an attack during any particular visit."
+  },
+  {
+    "objectID": "map.html",
+    "href": "map.html",
+    "title": "Map",
+    "section": "",
+    "text": "Rows: 5094 Columns: 15\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (14): Case_Number, Date, Type, Country, Area, Location, Activity, Name, ...\ndbl  (1): Year\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
+  },
+  {
+    "objectID": "map.html#fatal-vs.-non-fatal-attacks",
+    "href": "map.html#fatal-vs.-non-fatal-attacks",
+    "title": "Map",
+    "section": "Fatal vs. non-fatal attacks",
+    "text": "Fatal vs. non-fatal attacks\nOnly records marked Y or N are counted; unknown, missing, and other values are excluded.\n\n\n# A tibble: 2 × 2\n  Outcome       n\n  &lt;chr&gt;     &lt;int&gt;\n1 Fatal       943\n2 Non-fatal  3763"
+  }
+]
